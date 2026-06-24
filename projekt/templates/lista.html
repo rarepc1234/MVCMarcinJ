@@ -1,0 +1,32 @@
+{% extends "bazowy.html" %}
+
+{% block tresc %}
+<h2>Lista książek</h2>
+{% if ksiazki %}
+<table>
+    <thead>
+        <tr>
+            <th>Tytuł</th>
+            <th>Autor</th>
+            <th>Rok wydania</th>
+            <th>Akcje</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for pozycja in ksiazki %}
+        <tr>
+            <td>{{ pozycja.tytul }}</td>
+            <td>{{ pozycja.autor }}</td>
+            <td>{{ pozycja.rok_wydania }}</td>
+            <td>
+                <a href="{{ url_for('kontroler.edytuj', ksiazka_id=pozycja.id) }}">Edytuj</a>
+                <a href="{{ url_for('kontroler.usun', ksiazka_id=pozycja.id) }}">Usuń</a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>Brak książek w bibliotece.</p>
+{% endif %}
+{% endblock %}
